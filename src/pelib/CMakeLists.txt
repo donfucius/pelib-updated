@@ -1,4 +1,4 @@
-set(PELIB_SOURCES
+	set(PELIB_SOURCES
 	BoundImportDirectory.cpp
 	CoffSymbolTable.cpp
 	ComHeaderDirectory.cpp
@@ -16,16 +16,16 @@ set(PELIB_SOURCES
 	SecurityDirectory.cpp
 )
 
-add_library(pelib STATIC ${PELIB_SOURCES})
+target_sources(${PROJECT_NAME} PRIVATE ${PELIB_SOURCES})
 
-target_compile_features(pelib PUBLIC cxx_std_17)
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 
-target_include_directories(pelib
+target_include_directories(${PROJECT_NAME}
 	PUBLIC ${PROJECT_SOURCE_DIR}/include/)
 
 # Disable all warnings from this library.
 if(MSVC)
-	target_compile_options(pelib PUBLIC "/w")
+	target_compile_options(${PROJECT_NAME} PUBLIC "/w")
 else()
-	target_compile_options(pelib PUBLIC "-w")
+	target_compile_options(${PROJECT_NAME} PUBLIC "-w")
 endif()
